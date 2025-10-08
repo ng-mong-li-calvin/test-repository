@@ -29,3 +29,4 @@ jobs:
             Attempt ${{ github.run_attempt }}
           draft: false
           prerelease: false
+          allowUpdates: true
