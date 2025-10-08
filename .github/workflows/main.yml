@@ -20,13 +20,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }} v${{ github.run_id }}.${{ github.run_number }}
           release_name: Release ${{ github.ref_name }}
           body: |
             Automated release created from tag ${{ github.ref_name }}.
-            ID ${{ github.run_id }}
-            Run number ${{ github.run_number }}
             Attempt ${{ github.run_attempt }}
           draft: false
           prerelease: false
-          allowUpdates: true
