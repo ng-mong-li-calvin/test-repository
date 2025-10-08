@@ -24,6 +24,8 @@ jobs:
           release_name: Release ${{ github.ref_name }}
           body: |
             Automated release created from tag ${{ github.ref_name }}.
-            See changes in the commit history.
+            ID ${{ github.run_id }}
+            Run number ${{ github.run_number }}
+            Attempt ${{ github.run_attempt }}
           draft: false
           prerelease: false
