@@ -6,51 +6,21 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  tagged-release:
+    name: "Tagged Release"
+    runs-on: "ubuntu-latest"
+
     steps:
-      - uses: actions/checkout@v4
-      - run: |
-          if [ ! -f "main.py" ]; then
-            echo "main.py does not exist"
-            exit 1
-          fi
-      - run: |
-          python main.py
+      # ...
+      - name: "Build & test"
+        run: |
+          echo "done!"
 
-  release:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # Give the workflow write permission for creating releases
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          fetch-depth: 0 # Fetches all history for all tags and branches
-
-      - name: Get next version
-        id: semvers
-        uses: haya14busa/action-semvers@v1.0.0
-        with:
-          # You can specify the increment type here (e.g., minor, major, or patch)
-          patch_regexp: '.*feat:.*|.*fix:.*|.*chore:.*'
-          # This example will increment the patch version for any commit message matching the pattern
-          # For a more advanced system, consider semantic-release (1.2.3)
-
-      - name: Create GitHub Release
-        id: create_release
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { nextSemVer } = require(process.env.GITHUB_ACTION_PATH + '/semvers');
-            const newVersion = nextSemVer;
-            const tagName = `v${newVersion}`;
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            LICENSE.txt
+            *.jar
             
-            github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: tagName,
-              name: `Release ${tagName}`,
-              body: `Automatically generated release for version ${newVersion}.`
-            });
-          github-token: ${{ secrets.GITHUB_TOKEN }}
