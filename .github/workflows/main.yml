@@ -11,9 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          if [ ! -f "main.py" ]; then
-            echo "main.py does not exist"
-            exit 1
-          fi
-      - run: |
           python main.py
