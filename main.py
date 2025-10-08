@@ -3,7 +3,8 @@ def add(a, b):
 
 
 def test():
-    assert add(3, 5) == 1
+    assert not add(3, 5) == 1
+    assert add(6, 2) == 8
 
 
 def main():
