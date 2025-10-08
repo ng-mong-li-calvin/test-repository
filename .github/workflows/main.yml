@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: if [ -if "main_py" ]; then echo "True" else echo "False" fi
+      - run: if [ -f "main_py" ]; then echo "True" else echo "False" fi
       - run: echo hello world
