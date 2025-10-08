@@ -1,1 +1,1 @@
-print("scrambled eggs and bacon")
+print("garlic toast, scrambled eggs and bacon")
